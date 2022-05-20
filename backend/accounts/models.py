@@ -57,6 +57,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['name']
 
+    class Meta:
+        ordering = ['created_at']
+
     def __str__(self):
         return self.name
 

@@ -40,7 +40,7 @@ class Query(graphene.ObjectType):
         """
         Get all the users or filter by name or email
         """
-        users = get_user_model().objects.all().order_by('-created_at')
+        users = get_user_model().objects.all()
 
         # Apply search filters if any
         if name:

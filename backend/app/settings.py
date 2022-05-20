@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Custom Apps
     'accounts',
-    #Thirdparty Apps
+    # Thirdparty Apps
     'graphene_django',
     'graphql_jwt.refresh_token.apps.RefreshTokenConfig',
 ]
@@ -138,6 +138,7 @@ AUTHENTICATION_BACKENDS = [
 # Thirdpart Configuration
 GRAPHENE = {
     'SCHEMA': 'app.schema.schema',
+    'SCHEMA_OUTPUT': '../client/lib/src/gql/schema.graphql',
     'MIDDLEWARE': ['graphql_jwt.middleware.JSONWebTokenMiddleware']
 }
 
