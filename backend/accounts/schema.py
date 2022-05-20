@@ -52,7 +52,7 @@ class Query(graphene.ObjectType):
         Get currently logged in user
         """
         user = info.context.user
-        if user.is_anonymous:
+        if not user.is_authenticated:
             raise Exception('Authentication Failure!')
         return user
 
@@ -67,7 +67,8 @@ class CreateUser(graphene.Mutation):
         password = graphene.String(required=True)
         email = graphene.String(required=True)
 
-    def mutate(self, info, name, password, email):
+    @classmethod
+    def mutate(cls, root, info, name, password, email):
         user = get_user_model().objects.create_user(
             name=name,
             email=email,
