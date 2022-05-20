@@ -13,4 +13,5 @@ Create a full-stack application with Python (Django) and Dart (Flutter)
 
 - Generate accounts app
 - Create a user model and custom user manager
+- Create tests for custom model
 - Create a graphql schema
