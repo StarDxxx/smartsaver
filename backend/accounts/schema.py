@@ -2,6 +2,10 @@ from django.contrib.auth import get_user_model
 from django.db.models.functions import Lower
 import graphene
 from graphene_django import DjangoObjectType
+from graphql_jwt.decorators import login_required
+
+
+from accounts.models import User
 
 
 class UserType(DjangoObjectType):
@@ -26,9 +30,9 @@ class Query(graphene.ObjectType):
         """
 
         if name:
-            return get_user_model().objects.annotate(name_lower=Lower('name')).filter(name_lower=name.lower()).first()
+            return get_user_model().objects.annotate(name_lower=Lower('name')).filter(name_lower=name.lower()).get()
         if email:
-            return get_user_model().objects.annotate(email_lower=Lower('email')).filter(email_lower=email.lower()).first()
+            return get_user_model().objects.annotate(email_lower=Lower('email')).filter(email_lower=email.lower()).get()
 
         return None
 
@@ -47,16 +51,34 @@ class Query(graphene.ObjectType):
                 'email')).filter(email_lower=email.lower())
         return users
 
+    @login_required
     def resolve_me(root, info):
         """
         Get currently logged in user
         """
         user = info.context.user
-        if not user.is_authenticated:
-            raise Exception('Authentication Failure!')
         return user
 
 # Mutations
+
+
+class AddFriend(graphene.Mutation):
+    class Arguments:
+        user_id = graphene.ID(required=True)
+
+    user = graphene.Field(UserType)
+
+    @classmethod
+    @login_required
+    def mutate(cls, root, info, user_id):
+        user = info.context.user
+        print(user)
+
+        friend = get_user_model().objects.filter(pk=user_id).get()
+
+        user.friends.add(friend)
+        user.save()
+        return AddFriend(user=user)
 
 
 class CreateUser(graphene.Mutation):
@@ -80,3 +102,4 @@ class CreateUser(graphene.Mutation):
 
 class Mutation(graphene.ObjectType):
     create_user = CreateUser.Field()
+    add_friend = AddFriend.Field()

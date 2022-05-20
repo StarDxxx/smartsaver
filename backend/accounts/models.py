@@ -1,5 +1,7 @@
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
 from django.db import models
+from django.core.validators import validate_email
+from django.forms import ValidationError
 
 
 class UserManager(BaseUserManager):
@@ -11,9 +13,14 @@ class UserManager(BaseUserManager):
             raise ValueError('Users must have an email address')
         if not name:
             raise ValueError('Users must have a name')
+        normalized_email = self.normalize_email(email)
+        try:
+            validate_email(normalized_email)
+        except ValidationError as e:
+            raise ValidationError(e)
 
         user = self.model(
-            email=self.normalize_email(email),
+            email=normalized_email,
             name=name,
         )
 
