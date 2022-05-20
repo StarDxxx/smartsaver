@@ -1,0 +1,59 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+type AddFriend {
+  user: UserType
+}
+
+type CreateUser {
+  user: UserType
+}
+
+scalar DateTime
+
+scalar GenericScalar
+
+type Mutation {
+  createUser(email: String!, name: String!, password: String!): CreateUser
+  addFriend(userId: ID!): AddFriend
+  tokenAuth(email: String!, password: String!): ObtainJSONWebToken
+  verifyToken(token: String!): Verify
+  refreshToken(refreshToken: String!): Refresh
+}
+
+type ObtainJSONWebToken {
+  token: String
+  refreshToken: String
+}
+
+type Query {
+  me: UserType
+  user(name: String, email: String): UserType
+  users(name: String, email: String): [UserType]
+}
+
+type Refresh {
+  token: String
+  payload: GenericScalar
+  refreshToken: String
+}
+
+type UserType {
+  id: ID!
+  password: String!
+  lastLogin: DateTime
+  isSuperuser: Boolean!
+  name: String!
+  email: String!
+  friends: [UserType!]!
+  isAdmin: Boolean!
+  isActive: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Verify {
+  payload: GenericScalar
+}
