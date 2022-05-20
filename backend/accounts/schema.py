@@ -27,16 +27,16 @@ class Query(graphene.ObjectType):
 
         if name:
             return get_user_model().objects.annotate(name_lower=Lower('name')).filter(name_lower=name.lower()).first()
-        elif email:
+        if email:
             return get_user_model().objects.annotate(email_lower=Lower('email')).filter(email_lower=email.lower()).first()
-        else:
-            return None
+
+        return None
 
     def resolve_users(root, info, name=None, email=None, **kwargs):
         """
         Get all the users or filter by name or email
         """
-        users = get_user_model().objects
+        users = get_user_model().objects.all().order_by('-created_at')
 
         # Apply search filters if any
         if name:
@@ -45,7 +45,7 @@ class Query(graphene.ObjectType):
         if email:
             users = users.annotate(email_lower=Lower(
                 'email')).filter(email_lower=email.lower())
-        return users.all()
+        return users
 
     def resolve_me(root, info):
         """
