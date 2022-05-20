@@ -19,13 +19,15 @@ type Mutation {
   createUser(email: String!, name: String!, password: String!): CreateUser
   addFriend(userId: ID!): AddFriend
   tokenAuth(email: String!, password: String!): ObtainJSONWebToken
-  verifyToken(token: String!): Verify
-  refreshToken(refreshToken: String!): Refresh
+  verifyToken(token: String): Verify
+  refreshToken(refreshToken: String): Refresh
 }
 
 type ObtainJSONWebToken {
-  token: String
-  refreshToken: String
+  payload: GenericScalar!
+  refreshExpiresIn: Int!
+  token: String!
+  refreshToken: String!
 }
 
 type Query {
@@ -35,9 +37,10 @@ type Query {
 }
 
 type Refresh {
-  token: String
-  payload: GenericScalar
-  refreshToken: String
+  payload: GenericScalar!
+  refreshExpiresIn: Int!
+  token: String!
+  refreshToken: String!
 }
 
 type UserType {
@@ -52,8 +55,9 @@ type UserType {
   isActive: Boolean!
   createdAt: DateTime!
   updatedAt: DateTime!
+  mutualFriends: [UserType]
 }
 
 type Verify {
-  payload: GenericScalar
+  payload: GenericScalar!
 }
