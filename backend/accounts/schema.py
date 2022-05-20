@@ -5,12 +5,19 @@ from graphene_django import DjangoObjectType
 from graphql_jwt.decorators import login_required
 
 
-from accounts.models import User
-
-
 class UserType(DjangoObjectType):
+    mutual_friends = graphene.List(lambda: UserType)
+
     class Meta:
         model = get_user_model()
+
+    def resolve_mutual_friends(self, info):
+        user = info.context.user
+
+        if not user:
+            return None
+
+        return self.friends.all() & user.friends.all()
 
 
 # Queries
@@ -28,11 +35,15 @@ class Query(graphene.ObjectType):
         """
         Search for a single user
         """
-
         if name:
-            return get_user_model().objects.annotate(name_lower=Lower('name')).filter(name_lower=name.lower()).get()
+            user = get_user_model().objects.annotate(name_lower=Lower('name')
+                                                     ).filter(name_lower=name.lower()).get()
+            return user
         if email:
-            return get_user_model().objects.annotate(email_lower=Lower('email')).filter(email_lower=email.lower()).get()
+            user = get_user_model().objects.annotate(email_lower=Lower('email')
+                                                     ).filter(email_lower=email.lower()).get()
+
+            return user
 
         return None
 
