@@ -7,11 +7,11 @@ final ThemeData theme = ThemeData(
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(4),
+        borderRadius: BorderRadius.circular(24),
       ),
     ),
   ),
-  // scaffoldBackgroundColor: Colors.grey.shade50,
+  scaffoldBackgroundColor: Colors.grey.shade50,
   textTheme: GoogleFonts.baloo2TextTheme(),
   visualDensity: VisualDensity.adaptivePlatformDensity,
 );

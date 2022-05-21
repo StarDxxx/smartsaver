@@ -15,15 +15,15 @@ class Login extends StatelessWidget {
       body: SingleChildScrollView(
         child: Center(
           child: Container(
-            width: isTab ? maxWidth * 0.3 : double.infinity,
-            constraints: BoxConstraints(minHeight: maxHeight),
+            width: isTab ? maxWidth * 0.6 : double.infinity,
+            constraints: BoxConstraints(minHeight: maxHeight, maxWidth: 620),
             padding: const EdgeInsets.all(16),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 // Heading Image
                 Container(
-                  margin: const EdgeInsets.only(bottom: 24),
+                  margin: const EdgeInsets.only(bottom: 32),
                   child: SvgPicture.asset(
                     'images/login.svg',
                     height: isTab ? maxWidth * 0.12 : maxWidth * 0.4,
@@ -33,11 +33,11 @@ class Login extends StatelessWidget {
                 // Heading Text
                 Text(
                   'Hello there!',
-                  style: Theme.of(context).textTheme.headline4,
+                  style: Theme.of(context).textTheme.headline3,
                 ),
                 Text(
                   'Enter your credentials below to login',
-                  style: Theme.of(context).textTheme.bodyMedium,
+                  style: Theme.of(context).textTheme.bodyText1,
                 ),
                 const SizedBox(
                   height: 40,
@@ -45,20 +45,20 @@ class Login extends StatelessWidget {
                 // Email Field
                 Container(
                   width: maxWidth * 0.9,
+                  clipBehavior: Clip.antiAlias,
                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(double.infinity),
+                    color: Colors.grey.shade200,
+                    border: Border.all(color: Colors.white),
+                    borderRadius: BorderRadius.circular(24),
                   ),
-                  child: const Padding(
-                    padding: EdgeInsets.only(left: 12.0),
-                    child: TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Email',
-                        border: InputBorder.none,
-                        suffixIcon: Icon(Icons.email),
-                      ),
-                      keyboardType: TextInputType.emailAddress,
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: const TextField(
+                    decoration: InputDecoration(
+                      labelText: 'Email',
+                      border: InputBorder.none,
+                      suffixIcon: Icon(Icons.email),
                     ),
+                    keyboardType: TextInputType.emailAddress,
                   ),
                 ),
                 const SizedBox(
@@ -67,40 +67,38 @@ class Login extends StatelessWidget {
                 // Password Field
                 Container(
                   width: maxWidth * 0.9,
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
+                  clipBehavior: Clip.antiAlias,
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade200,
+                    border: Border.all(color: Colors.white),
+                    borderRadius: BorderRadius.circular(24),
                   ),
-                  child: const Padding(
-                    padding: EdgeInsets.only(left: 12.0),
-                    child: TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Password',
-                        border: InputBorder.none,
-                        suffixIcon: Icon(Icons.lock),
-                      ),
-                      obscureText: true,
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: const TextField(
+                    decoration: InputDecoration(
+                      labelText: 'Password',
+                      border: InputBorder.none,
+                      suffixIcon: Icon(Icons.lock),
                     ),
+                    obscureText: true,
                   ),
                 ),
                 const SizedBox(
-                  height: 16,
+                  height: 32,
                 ),
                 SizedBox(
-                  width: maxWidth * 0.6,
+                  width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
                       // TODO: Add user login api call
                       Navigator.of(context).pushNamedAndRemoveUntil(
                           Dashboard.routeName, (route) => false);
                     },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 12.0),
+                    child: const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 16.0),
                       child: Text(
-                        'Login',
-                        style: Theme.of(context).textTheme.button?.copyWith(
-                              color: Colors.white,
-                              fontSize: 24,
-                            ),
+                        'LOGIN',
+                        style: TextStyle(fontSize: 20,fontWeight: FontWeight.w500),
                       ),
                     ),
                   ),
