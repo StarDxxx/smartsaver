@@ -1,0 +1,15 @@
+targets:
+  $default:
+    builders:
+      graphql_codegen:
+        options:
+          clients:
+            - graphql
+            - graphql_flutter
+          scalars:
+            ISODateTime:
+              type: DateTime
+            GenericScalar:
+              type: Map<String, dynamic>
+          scopes:
+            - lib/src/gql/**

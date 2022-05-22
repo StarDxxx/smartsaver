@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:smartsaver/src/gql/users.graphql.dart';
 
 class UsersListItem extends StatelessWidget {
+  final Query$Users$users user;
   const UsersListItem({
     Key? key,
+    required this.user,
   }) : super(key: key);
 
   @override
@@ -19,8 +22,8 @@ class UsersListItem extends StatelessWidget {
           color: Theme.of(context).colorScheme.onPrimary,
         ),
       ),
-      title: const Text('Doug'),
-      subtitle: const Text('doug@demo.com'),
+      title: Text(user.name),
+      subtitle: Text(user.email),
       trailing: IconButton(
         onPressed: () {
           // TODO: Connect add friends logic
@@ -29,8 +32,8 @@ class UsersListItem extends StatelessWidget {
       ),
       onTap: () {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Horray'),
+          SnackBar(
+            content: Text('You are now friends with ${user.name}'),
           ),
         );
       },

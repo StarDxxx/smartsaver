@@ -13,8 +13,8 @@ class UserType(DjangoObjectType):
 
     def resolve_mutual_friends(self, info):
         user = info.context.user
-
-        if not user:
+        if user.is_anonymous:
+            print("****** No User Found *****")
             return None
 
         return self.friends.all() & user.friends.all()

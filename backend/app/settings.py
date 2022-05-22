@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     # Custom Apps
     'accounts',
     # Thirdparty Apps
+    'corsheaders',
     'graphene_django',
     'graphql_jwt.refresh_token.apps.RefreshTokenConfig',
 ]
@@ -47,6 +48,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -135,6 +137,8 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
+APPEND_SLASH = True
+
 # Thirdpart Configuration
 GRAPHENE = {
     'SCHEMA': 'app.schema.schema',
@@ -148,3 +152,5 @@ GRAPHQL_JWT = {
     # optional
     "JWT_LONG_RUNNING_REFRESH_TOKEN": True,
 }
+
+CORS_ALLOW_ALL_ORIGINS = True

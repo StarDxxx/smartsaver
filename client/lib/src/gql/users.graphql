@@ -1,0 +1,10 @@
+query Users {
+	users {
+		id
+		name
+		email
+		mutualFriends {
+			name
+		}
+	}
+}

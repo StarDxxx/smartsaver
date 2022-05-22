@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:smartsaver/src/components/users_list.dart';
 
-import '../components/users_list_item.dart';
 
 class Dashboard extends StatelessWidget {
   static const routeName = '/dashboard';
@@ -8,7 +8,6 @@ class Dashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final maxWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       body: SafeArea(
         child: CustomScrollView(
@@ -34,34 +33,9 @@ class Dashboard extends StatelessWidget {
                 ),
               ],
             ),
-            SliverPadding(
-              padding: EdgeInsets.symmetric(
-                horizontal: maxWidth >= 769 ? maxWidth * 0.2 : maxWidth * 0.02,
-              ),
-              sliver: SliverList(
-                delegate: SliverChildListDelegate(
-                  [
-                    const UsersListItem(),
-                    const UsersListItem(),
-                    const UsersListItem(),
-                    const UsersListItem(),
-                    const UsersListItem(),
-                    const UsersListItem(),
-                    const UsersListItem(),
-                    const UsersListItem(),
-                    const UsersListItem(),
-                    const UsersListItem(),
-                    const UsersListItem(),
-                    const UsersListItem(),
-                    const UsersListItem(),
-                    const UsersListItem(),
-                    const UsersListItem(),
-                    const UsersListItem(),
-                    const UsersListItem(),
-                  ],
-                ),
-              ),
-            ),
+            const SliverFillRemaining(
+              child: UsersList(),
+            )
           ],
         ),
       ),
