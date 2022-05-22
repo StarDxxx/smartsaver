@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:smartsaver/src/services/api.dart';
-
 import 'utils/theme.dart';
 import 'views/home.dart';
 import 'views/login.dart';
@@ -12,18 +9,15 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GraphQLProvider(
-      client: ApiService.client,
-      child: MaterialApp(
-        title: 'Smart Saver',
-        theme: theme,
-        debugShowCheckedModeBanner: false,
-        routes: {
-          '/': (context) => const Home(),
-          '/dashboard': (context) => const Dashboard(),
-          '/login': (context) => const Login()
-        },
-      ),
+    return MaterialApp(
+      title: 'Smart Saver',
+      theme: theme,
+      debugShowCheckedModeBanner: false,
+      routes: {
+        '/': (context) => const Home(),
+        '/dashboard': (context) => const Dashboard(),
+        '/login': (context) => const Login()
+      },
     );
   }
 }

@@ -6,6 +6,20 @@ part of 'users.graphql.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+Variables$Query$Users _$Variables$Query$UsersFromJson(
+        Map<String, dynamic> json) =>
+    Variables$Query$Users(
+      name: json['name'] as String?,
+      email: json['email'] as String?,
+    );
+
+Map<String, dynamic> _$Variables$Query$UsersToJson(
+        Variables$Query$Users instance) =>
+    <String, dynamic>{
+      'name': instance.name,
+      'email': instance.email,
+    };
+
 Query$Users _$Query$UsersFromJson(Map<String, dynamic> json) => Query$Users(
       users: (json['users'] as List<dynamic>?)
           ?.map((e) => e == null

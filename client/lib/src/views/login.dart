@@ -89,9 +89,9 @@ class Login extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       // TODO: Add user login api call
-                      Navigator.of(context).pushNamedAndRemoveUntil(
+                      await Navigator.of(context).pushNamedAndRemoveUntil(
                           Dashboard.routeName, (route) => false);
                     },
                     child: const Padding(
@@ -105,7 +105,7 @@ class Login extends StatelessWidget {
                       ),
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ),

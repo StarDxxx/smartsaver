@@ -1,58 +1,37 @@
 import 'package:flutter/material.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smartsaver/src/components/users_list_item.dart';
-import 'package:smartsaver/src/gql/users.graphql.dart';
+import 'package:smartsaver/src/providers/users.dart';
 
-class UsersList extends StatelessWidget {
+class UsersList extends ConsumerWidget {
   const UsersList({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Query$Users$Widget(
-      builder: (
-        QueryResult result, {
-        VoidCallback? refetch,
-        FetchMore? fetchMore,
-      }) {
-        // Loading State
-        if (result.isLoading) {
-          return const Center(
-            child: SizedBox(
-              height: 24,
-              width: 24,
-              child: CircularProgressIndicator.adaptive(),
-            ),
-          );
+  Widget build(BuildContext context, WidgetRef ref) {
+    final provider = ref.watch(usersProvider);
+    return provider.when(
+      data: (data) {
+        if (data == null) {
+          return const Text('No data');
         }
-        // Error State
-        if (result.hasException) {
-          debugPrint(
-            result.exception?.linkException?.originalException.toString(),
-          );
-          return const Center(
-            child: Text('Something went wrong'),
-          );
-        }
-        // Possible Data
-
-        final data = result.parsedData as Query$Users;
-
-        if (data.users == null) {
-          return const Text('No users found');
-        }
-
-        final users = data.users!;
-
         return ListView.builder(
-          itemCount: users.length,
           itemBuilder: (context, index) {
-            final user = users[index]!;
-            return UsersListItem(
-              user: user,
-            );
+            final user = data[index]!;
+            return UsersListItem(user: user);
           },
+          itemCount: data.length,
         );
       },
+      error: (err, st) {
+        return const Text('Oh No! something went wrong');
+      },
+      loading: () => const Center(
+        child: SizedBox(
+          height: 24,
+          width: 24,
+          child: CircularProgressIndicator.adaptive(),
+        ),
+      ),
     );
   }
 }

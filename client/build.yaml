@@ -3,9 +3,8 @@ targets:
     builders:
       graphql_codegen:
         options:
-          clients:
+          client:
             - graphql
-            - graphql_flutter
           scalars:
             ISODateTime:
               type: DateTime

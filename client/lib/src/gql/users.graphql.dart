@@ -1,9 +1,40 @@
-import 'package:flutter/widgets.dart' as widgets;
 import 'package:gql/ast.dart';
-import 'package:graphql/client.dart' as graphql;
-import 'package:graphql_flutter/graphql_flutter.dart' as graphql_flutter;
 import 'package:json_annotation/json_annotation.dart';
 part 'users.graphql.g.dart';
+
+@JsonSerializable(explicitToJson: true)
+class Variables$Query$Users {
+  Variables$Query$Users({this.name, this.email});
+
+  @override
+  factory Variables$Query$Users.fromJson(Map<String, dynamic> json) =>
+      _$Variables$Query$UsersFromJson(json);
+
+  final String? name;
+
+  final String? email;
+
+  Map<String, dynamic> toJson() => _$Variables$Query$UsersToJson(this);
+  int get hashCode {
+    final l$name = name;
+    final l$email = email;
+    return Object.hashAll([l$name, l$email]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (!(other is Variables$Query$Users) || runtimeType != other.runtimeType)
+      return false;
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) return false;
+    final l$email = email;
+    final lOther$email = other.email;
+    if (l$email != lOther$email) return false;
+    return true;
+  }
+}
 
 @JsonSerializable(explicitToJson: true)
 class Query$Users {
@@ -65,13 +96,33 @@ const queryDocumentUsers = DocumentNode(definitions: [
   OperationDefinitionNode(
       type: OperationType.query,
       name: NameNode(value: 'Users'),
-      variableDefinitions: [],
+      variableDefinitions: [
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'name')),
+            type: NamedTypeNode(
+                name: NameNode(value: 'String'), isNonNull: false),
+            defaultValue: DefaultValueNode(value: null),
+            directives: []),
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'email')),
+            type: NamedTypeNode(
+                name: NameNode(value: 'String'), isNonNull: false),
+            defaultValue: DefaultValueNode(value: null),
+            directives: [])
+      ],
       directives: [],
       selectionSet: SelectionSetNode(selections: [
         FieldNode(
             name: NameNode(value: 'users'),
             alias: null,
-            arguments: [],
+            arguments: [
+              ArgumentNode(
+                  name: NameNode(value: 'name'),
+                  value: VariableNode(name: NameNode(value: 'name'))),
+              ArgumentNode(
+                  name: NameNode(value: 'email'),
+                  value: VariableNode(name: NameNode(value: 'email')))
+            ],
             directives: [],
             selectionSet: SelectionSetNode(selections: [
               FieldNode(
@@ -126,101 +177,6 @@ const queryDocumentUsers = DocumentNode(definitions: [
             selectionSet: null)
       ])),
 ]);
-Query$Users _parserFn$Query$Users(Map<String, dynamic> data) =>
-    Query$Users.fromJson(data);
-
-class Options$Query$Users extends graphql.QueryOptions<Query$Users> {
-  Options$Query$Users(
-      {String? operationName,
-      graphql.FetchPolicy? fetchPolicy,
-      graphql.ErrorPolicy? errorPolicy,
-      graphql.CacheRereadPolicy? cacheRereadPolicy,
-      Object? optimisticResult,
-      Duration? pollInterval,
-      graphql.Context? context})
-      : super(
-            operationName: operationName,
-            fetchPolicy: fetchPolicy,
-            errorPolicy: errorPolicy,
-            cacheRereadPolicy: cacheRereadPolicy,
-            optimisticResult: optimisticResult,
-            pollInterval: pollInterval,
-            context: context,
-            document: queryDocumentUsers,
-            parserFn: _parserFn$Query$Users);
-}
-
-class WatchOptions$Query$Users extends graphql.WatchQueryOptions<Query$Users> {
-  WatchOptions$Query$Users(
-      {String? operationName,
-      graphql.FetchPolicy? fetchPolicy,
-      graphql.ErrorPolicy? errorPolicy,
-      graphql.CacheRereadPolicy? cacheRereadPolicy,
-      Object? optimisticResult,
-      graphql.Context? context,
-      Duration? pollInterval,
-      bool? eagerlyFetchResults,
-      bool carryForwardDataOnException = true,
-      bool fetchResults = false})
-      : super(
-            operationName: operationName,
-            fetchPolicy: fetchPolicy,
-            errorPolicy: errorPolicy,
-            cacheRereadPolicy: cacheRereadPolicy,
-            optimisticResult: optimisticResult,
-            context: context,
-            document: queryDocumentUsers,
-            pollInterval: pollInterval,
-            eagerlyFetchResults: eagerlyFetchResults,
-            carryForwardDataOnException: carryForwardDataOnException,
-            fetchResults: fetchResults,
-            parserFn: _parserFn$Query$Users);
-}
-
-class FetchMoreOptions$Query$Users extends graphql.FetchMoreOptions {
-  FetchMoreOptions$Query$Users({required graphql.UpdateQuery updateQuery})
-      : super(updateQuery: updateQuery, document: queryDocumentUsers);
-}
-
-extension ClientExtension$Query$Users on graphql.GraphQLClient {
-  Future<graphql.QueryResult<Query$Users>> query$Users(
-          [Options$Query$Users? options]) async =>
-      await this.query(options ?? Options$Query$Users());
-  graphql.ObservableQuery<Query$Users> watchQuery$Users(
-          [WatchOptions$Query$Users? options]) =>
-      this.watchQuery(options ?? WatchOptions$Query$Users());
-  void writeQuery$Users({required Query$Users data, bool broadcast = true}) =>
-      this.writeQuery(
-          graphql.Request(
-              operation: graphql.Operation(document: queryDocumentUsers)),
-          data: data.toJson(),
-          broadcast: broadcast);
-  Query$Users? readQuery$Users({bool optimistic = true}) {
-    final result = this.readQuery(
-        graphql.Request(
-            operation: graphql.Operation(document: queryDocumentUsers)),
-        optimistic: optimistic);
-    return result == null ? null : Query$Users.fromJson(result);
-  }
-}
-
-graphql_flutter.QueryHookResult<Query$Users> useQuery$Users(
-        [Options$Query$Users? options]) =>
-    graphql_flutter.useQuery(options ?? Options$Query$Users());
-graphql.ObservableQuery<Query$Users> useWatchQuery$Users(
-        [WatchOptions$Query$Users? options]) =>
-    graphql_flutter.useWatchQuery(options ?? WatchOptions$Query$Users());
-
-class Query$Users$Widget extends graphql_flutter.Query<Query$Users> {
-  Query$Users$Widget(
-      {widgets.Key? key,
-      Options$Query$Users? options,
-      required graphql_flutter.QueryBuilder<Query$Users> builder})
-      : super(
-            key: key,
-            options: options ?? Options$Query$Users(),
-            builder: builder);
-}
 
 @JsonSerializable(explicitToJson: true)
 class Query$Users$users {
