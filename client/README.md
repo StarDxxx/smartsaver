@@ -1,6 +1,6 @@
 # Smart Saver Hiring Task (Flutter Client)
 
-## Photo Credits:
+## Photo Credits
 
 Images used as profile pictures in the client were sourced from the following photographers of [Unsplash](https://unsplash.com)
 

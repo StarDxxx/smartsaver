@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:smartsaver/src/extensions/capitalize.dart';
 import 'package:smartsaver/src/utils/messenger.dart';
-import 'package:smartsaver/src/views/dashboard.dart';
 
 import '../gql/auth.graphql.dart';
 import '../providers/auth.dart';
@@ -31,18 +31,14 @@ class _LoginState extends ConsumerState<Login> {
     final isTab = maxWidth >= 769;
 
     void login(String email, String password) async {
+      toggleLoading();
       try {
-        toggleLoading();
         await ref.read(authStateProvider.notifier).login(
               Variables$Mutation$Login(
                 email: email,
                 password: password,
               ),
             );
-
-        // ignore: use_build_context_synchronously
-        Navigator.of(context)
-            .pushNamedAndRemoveUntil(Dashboard.routeName, (route) => false);
       } catch (e) {
         toggleLoading();
         showMessenger(
@@ -50,7 +46,6 @@ class _LoginState extends ConsumerState<Login> {
           message: "$e",
           type: MessageType.error,
         );
-        return null;
       }
     }
 
@@ -70,18 +65,20 @@ class _LoginState extends ConsumerState<Login> {
                   Container(
                     margin: const EdgeInsets.only(bottom: 32),
                     child: SvgPicture.asset(
-                      'images/login.svg',
+                      'assets/images/login.svg',
                       height: isTab ? maxWidth * 0.12 : maxWidth * 0.4,
                       fit: BoxFit.scaleDown,
                     ),
                   ),
                   // Heading Text
                   Text(
-                    'Hello there!',
-                    style: Theme.of(context).textTheme.headline3,
+                    'hello there!',
+                    style: Theme.of(context).textTheme.headline3?.copyWith(
+                        color: Colors.grey.shade800,
+                        fontWeight: FontWeight.w800),
                   ),
                   Text(
-                    'Enter your credentials below to login',
+                    'Enter your login credentials'.titleCase,
                     style: Theme.of(context).textTheme.bodyText1,
                   ),
                   const SizedBox(
@@ -103,7 +100,7 @@ class _LoginState extends ConsumerState<Login> {
                       decoration: const InputDecoration(
                         hintText: 'Email',
                         border: InputBorder.none,
-                        suffixIcon: Icon(Icons.email),
+                        suffixIcon: Icon(Icons.email_outlined),
                       ),
                       keyboardType: TextInputType.emailAddress,
                       validator: (value) {
@@ -139,7 +136,7 @@ class _LoginState extends ConsumerState<Login> {
                       decoration: const InputDecoration(
                         hintText: 'Password',
                         border: InputBorder.none,
-                        suffixIcon: Icon(Icons.lock),
+                        suffixIcon: Icon(Icons.lock_outline_rounded),
                       ),
                       obscureText: true,
                       enabled: !isLoading,
@@ -164,7 +161,7 @@ class _LoginState extends ConsumerState<Login> {
                     child: ElevatedButton(
                       onPressed: isLoading
                           ? null
-                          : () async {
+                          : () {
                               // Basic validation
                               if (_formKey.currentState!.validate()) {
                                 _formKey.currentState!.save();

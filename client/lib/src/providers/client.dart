@@ -17,4 +17,10 @@ class GQLClient extends StateNotifier<GraphQLClient> {
     final authLink = AuthLink(getToken: () => "JWT $token");
     state = state.copyWith(link: authLink.concat(link));
   }
+
+  void removeAuthToken() {
+    final Link link = HttpLink(gqlUrl);
+    state.resetStore();
+    state = state.copyWith(link: link);
+  }
 }
