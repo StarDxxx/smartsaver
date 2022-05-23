@@ -26,6 +26,9 @@ Create a full-stack application with Python (Django) and Dart (Flutter)
 ### Client
 
 - Create all screens
-- Add ferry package for gql queries
-- Add additional user screen displaying mutual friends
+- Add graphql package and queries/mutations
 - Polish app theme
+
+## Backend Seed Data
+
+Backend seed data password is `demo1234` for all users.
