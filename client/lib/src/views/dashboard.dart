@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smartsaver/src/components/users_list.dart';
+import 'package:smartsaver/src/views/login.dart';
 
 
 class Dashboard extends StatelessWidget {
@@ -20,9 +21,9 @@ class Dashboard extends StatelessWidget {
                 IconButton(
                   tooltip: 'Logout',
                   onPressed: () {
-                    // TODO logout user
+                    // TODO Implement server logout
                     Navigator.of(context).pushNamedAndRemoveUntil(
-                      "/login",
+                      Login.routeName,
                       (route) => false,
                     );
                   },

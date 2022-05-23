@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:smartsaver/src/gql/users.graphql.dart';
 
 class UsersListItem extends StatelessWidget {
-  final Query$Users$users user;
+  final Query$FetchUsers$users user;
   const UsersListItem({
     Key? key,
     required this.user,
@@ -33,7 +33,12 @@ class UsersListItem extends StatelessWidget {
       onTap: () {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('You are now friends with ${user.name}'),
+            content: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text('You are now friends with ${user.name}'),
+            ),
+            backgroundColor: Theme.of(context).primaryColor,
+            behavior: SnackBarBehavior.floating,
           ),
         );
       },

@@ -6,50 +6,53 @@ part of 'users.graphql.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Variables$Query$Users _$Variables$Query$UsersFromJson(
+Variables$Query$FetchUsers _$Variables$Query$FetchUsersFromJson(
         Map<String, dynamic> json) =>
-    Variables$Query$Users(
+    Variables$Query$FetchUsers(
       name: json['name'] as String?,
       email: json['email'] as String?,
     );
 
-Map<String, dynamic> _$Variables$Query$UsersToJson(
-        Variables$Query$Users instance) =>
+Map<String, dynamic> _$Variables$Query$FetchUsersToJson(
+        Variables$Query$FetchUsers instance) =>
     <String, dynamic>{
       'name': instance.name,
       'email': instance.email,
     };
 
-Query$Users _$Query$UsersFromJson(Map<String, dynamic> json) => Query$Users(
+Query$FetchUsers _$Query$FetchUsersFromJson(Map<String, dynamic> json) =>
+    Query$FetchUsers(
       users: (json['users'] as List<dynamic>?)
           ?.map((e) => e == null
               ? null
-              : Query$Users$users.fromJson(e as Map<String, dynamic>))
+              : Query$FetchUsers$users.fromJson(e as Map<String, dynamic>))
           .toList(),
       $__typename: json['__typename'] as String,
     );
 
-Map<String, dynamic> _$Query$UsersToJson(Query$Users instance) =>
+Map<String, dynamic> _$Query$FetchUsersToJson(Query$FetchUsers instance) =>
     <String, dynamic>{
       'users': instance.users?.map((e) => e?.toJson()).toList(),
       '__typename': instance.$__typename,
     };
 
-Query$Users$users _$Query$Users$usersFromJson(Map<String, dynamic> json) =>
-    Query$Users$users(
+Query$FetchUsers$users _$Query$FetchUsers$usersFromJson(
+        Map<String, dynamic> json) =>
+    Query$FetchUsers$users(
       id: json['id'] as String,
       name: json['name'] as String,
       email: json['email'] as String,
       mutualFriends: (json['mutualFriends'] as List<dynamic>?)
           ?.map((e) => e == null
               ? null
-              : Query$Users$users$mutualFriends.fromJson(
+              : Query$FetchUsers$users$mutualFriends.fromJson(
                   e as Map<String, dynamic>))
           .toList(),
       $__typename: json['__typename'] as String,
     );
 
-Map<String, dynamic> _$Query$Users$usersToJson(Query$Users$users instance) =>
+Map<String, dynamic> _$Query$FetchUsers$usersToJson(
+        Query$FetchUsers$users instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
@@ -58,15 +61,73 @@ Map<String, dynamic> _$Query$Users$usersToJson(Query$Users$users instance) =>
       '__typename': instance.$__typename,
     };
 
-Query$Users$users$mutualFriends _$Query$Users$users$mutualFriendsFromJson(
+Query$FetchUsers$users$mutualFriends
+    _$Query$FetchUsers$users$mutualFriendsFromJson(Map<String, dynamic> json) =>
+        Query$FetchUsers$users$mutualFriends(
+          name: json['name'] as String,
+          $__typename: json['__typename'] as String,
+        );
+
+Map<String, dynamic> _$Query$FetchUsers$users$mutualFriendsToJson(
+        Query$FetchUsers$users$mutualFriends instance) =>
+    <String, dynamic>{
+      'name': instance.name,
+      '__typename': instance.$__typename,
+    };
+
+Variables$Mutation$AddFriend _$Variables$Mutation$AddFriendFromJson(
         Map<String, dynamic> json) =>
-    Query$Users$users$mutualFriends(
+    Variables$Mutation$AddFriend(
+      userId: json['userId'] as String,
+    );
+
+Map<String, dynamic> _$Variables$Mutation$AddFriendToJson(
+        Variables$Mutation$AddFriend instance) =>
+    <String, dynamic>{
+      'userId': instance.userId,
+    };
+
+Mutation$AddFriend _$Mutation$AddFriendFromJson(Map<String, dynamic> json) =>
+    Mutation$AddFriend(
+      addFriend: json['addFriend'] == null
+          ? null
+          : Mutation$AddFriend$addFriend.fromJson(
+              json['addFriend'] as Map<String, dynamic>),
+      $__typename: json['__typename'] as String,
+    );
+
+Map<String, dynamic> _$Mutation$AddFriendToJson(Mutation$AddFriend instance) =>
+    <String, dynamic>{
+      'addFriend': instance.addFriend?.toJson(),
+      '__typename': instance.$__typename,
+    };
+
+Mutation$AddFriend$addFriend _$Mutation$AddFriend$addFriendFromJson(
+        Map<String, dynamic> json) =>
+    Mutation$AddFriend$addFriend(
+      user: json['user'] == null
+          ? null
+          : Mutation$AddFriend$addFriend$user.fromJson(
+              json['user'] as Map<String, dynamic>),
+      $__typename: json['__typename'] as String,
+    );
+
+Map<String, dynamic> _$Mutation$AddFriend$addFriendToJson(
+        Mutation$AddFriend$addFriend instance) =>
+    <String, dynamic>{
+      'user': instance.user?.toJson(),
+      '__typename': instance.$__typename,
+    };
+
+Mutation$AddFriend$addFriend$user _$Mutation$AddFriend$addFriend$userFromJson(
+        Map<String, dynamic> json) =>
+    Mutation$AddFriend$addFriend$user(
       name: json['name'] as String,
       $__typename: json['__typename'] as String,
     );
 
-Map<String, dynamic> _$Query$Users$users$mutualFriendsToJson(
-        Query$Users$users$mutualFriends instance) =>
+Map<String, dynamic> _$Mutation$AddFriend$addFriend$userToJson(
+        Mutation$AddFriend$addFriend$user instance) =>
     <String, dynamic>{
       'name': instance.name,
       '__typename': instance.$__typename,

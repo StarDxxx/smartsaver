@@ -3,18 +3,18 @@ import 'package:json_annotation/json_annotation.dart';
 part 'users.graphql.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class Variables$Query$Users {
-  Variables$Query$Users({this.name, this.email});
+class Variables$Query$FetchUsers {
+  Variables$Query$FetchUsers({this.name, this.email});
 
   @override
-  factory Variables$Query$Users.fromJson(Map<String, dynamic> json) =>
-      _$Variables$Query$UsersFromJson(json);
+  factory Variables$Query$FetchUsers.fromJson(Map<String, dynamic> json) =>
+      _$Variables$Query$FetchUsersFromJson(json);
 
   final String? name;
 
   final String? email;
 
-  Map<String, dynamic> toJson() => _$Variables$Query$UsersToJson(this);
+  Map<String, dynamic> toJson() => _$Variables$Query$FetchUsersToJson(this);
   int get hashCode {
     final l$name = name;
     final l$email = email;
@@ -24,8 +24,8 @@ class Variables$Query$Users {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-    if (!(other is Variables$Query$Users) || runtimeType != other.runtimeType)
-      return false;
+    if (!(other is Variables$Query$FetchUsers) ||
+        runtimeType != other.runtimeType) return false;
     final l$name = name;
     final lOther$name = other.name;
     if (l$name != lOther$name) return false;
@@ -37,19 +37,19 @@ class Variables$Query$Users {
 }
 
 @JsonSerializable(explicitToJson: true)
-class Query$Users {
-  Query$Users({this.users, required this.$__typename});
+class Query$FetchUsers {
+  Query$FetchUsers({this.users, required this.$__typename});
 
   @override
-  factory Query$Users.fromJson(Map<String, dynamic> json) =>
-      _$Query$UsersFromJson(json);
+  factory Query$FetchUsers.fromJson(Map<String, dynamic> json) =>
+      _$Query$FetchUsersFromJson(json);
 
-  final List<Query$Users$users?>? users;
+  final List<Query$FetchUsers$users?>? users;
 
   @JsonKey(name: '__typename')
   final String $__typename;
 
-  Map<String, dynamic> toJson() => _$Query$UsersToJson(this);
+  Map<String, dynamic> toJson() => _$Query$FetchUsersToJson(this);
   int get hashCode {
     final l$users = users;
     final l$$__typename = $__typename;
@@ -62,7 +62,7 @@ class Query$Users {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-    if (!(other is Query$Users) || runtimeType != other.runtimeType)
+    if (!(other is Query$FetchUsers) || runtimeType != other.runtimeType)
       return false;
     final l$users = users;
     final lOther$users = other.users;
@@ -84,18 +84,19 @@ class Query$Users {
   }
 }
 
-extension UtilityExtension$Query$Users on Query$Users {
-  Query$Users copyWith(
-          {List<Query$Users$users?>? Function()? users, String? $__typename}) =>
-      Query$Users(
+extension UtilityExtension$Query$FetchUsers on Query$FetchUsers {
+  Query$FetchUsers copyWith(
+          {List<Query$FetchUsers$users?>? Function()? users,
+          String? $__typename}) =>
+      Query$FetchUsers(
           users: users == null ? this.users : users(),
           $__typename: $__typename == null ? this.$__typename : $__typename);
 }
 
-const queryDocumentUsers = DocumentNode(definitions: [
+const queryDocumentFetchUsers = DocumentNode(definitions: [
   OperationDefinitionNode(
       type: OperationType.query,
-      name: NameNode(value: 'Users'),
+      name: NameNode(value: 'FetchUsers'),
       variableDefinitions: [
         VariableDefinitionNode(
             variable: VariableNode(name: NameNode(value: 'name')),
@@ -179,8 +180,8 @@ const queryDocumentUsers = DocumentNode(definitions: [
 ]);
 
 @JsonSerializable(explicitToJson: true)
-class Query$Users$users {
-  Query$Users$users(
+class Query$FetchUsers$users {
+  Query$FetchUsers$users(
       {required this.id,
       required this.name,
       required this.email,
@@ -188,8 +189,8 @@ class Query$Users$users {
       required this.$__typename});
 
   @override
-  factory Query$Users$users.fromJson(Map<String, dynamic> json) =>
-      _$Query$Users$usersFromJson(json);
+  factory Query$FetchUsers$users.fromJson(Map<String, dynamic> json) =>
+      _$Query$FetchUsers$usersFromJson(json);
 
   final String id;
 
@@ -197,12 +198,12 @@ class Query$Users$users {
 
   final String email;
 
-  final List<Query$Users$users$mutualFriends?>? mutualFriends;
+  final List<Query$FetchUsers$users$mutualFriends?>? mutualFriends;
 
   @JsonKey(name: '__typename')
   final String $__typename;
 
-  Map<String, dynamic> toJson() => _$Query$Users$usersToJson(this);
+  Map<String, dynamic> toJson() => _$Query$FetchUsers$usersToJson(this);
   int get hashCode {
     final l$id = id;
     final l$name = name;
@@ -223,7 +224,7 @@ class Query$Users$users {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-    if (!(other is Query$Users$users) || runtimeType != other.runtimeType)
+    if (!(other is Query$FetchUsers$users) || runtimeType != other.runtimeType)
       return false;
     final l$id = id;
     final lOther$id = other.id;
@@ -254,14 +255,15 @@ class Query$Users$users {
   }
 }
 
-extension UtilityExtension$Query$Users$users on Query$Users$users {
-  Query$Users$users copyWith(
+extension UtilityExtension$Query$FetchUsers$users on Query$FetchUsers$users {
+  Query$FetchUsers$users copyWith(
           {String? id,
           String? name,
           String? email,
-          List<Query$Users$users$mutualFriends?>? Function()? mutualFriends,
+          List<Query$FetchUsers$users$mutualFriends?>? Function()?
+              mutualFriends,
           String? $__typename}) =>
-      Query$Users$users(
+      Query$FetchUsers$users(
           id: id == null ? this.id : id,
           name: name == null ? this.name : name,
           email: email == null ? this.email : email,
@@ -271,13 +273,14 @@ extension UtilityExtension$Query$Users$users on Query$Users$users {
 }
 
 @JsonSerializable(explicitToJson: true)
-class Query$Users$users$mutualFriends {
-  Query$Users$users$mutualFriends(
+class Query$FetchUsers$users$mutualFriends {
+  Query$FetchUsers$users$mutualFriends(
       {required this.name, required this.$__typename});
 
   @override
-  factory Query$Users$users$mutualFriends.fromJson(Map<String, dynamic> json) =>
-      _$Query$Users$users$mutualFriendsFromJson(json);
+  factory Query$FetchUsers$users$mutualFriends.fromJson(
+          Map<String, dynamic> json) =>
+      _$Query$FetchUsers$users$mutualFriendsFromJson(json);
 
   final String name;
 
@@ -285,7 +288,7 @@ class Query$Users$users$mutualFriends {
   final String $__typename;
 
   Map<String, dynamic> toJson() =>
-      _$Query$Users$users$mutualFriendsToJson(this);
+      _$Query$FetchUsers$users$mutualFriendsToJson(this);
   int get hashCode {
     final l$name = name;
     final l$$__typename = $__typename;
@@ -295,7 +298,7 @@ class Query$Users$users$mutualFriends {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-    if (!(other is Query$Users$users$mutualFriends) ||
+    if (!(other is Query$FetchUsers$users$mutualFriends) ||
         runtimeType != other.runtimeType) return false;
     final l$name = name;
     final lOther$name = other.name;
@@ -307,11 +310,233 @@ class Query$Users$users$mutualFriends {
   }
 }
 
-extension UtilityExtension$Query$Users$users$mutualFriends
-    on Query$Users$users$mutualFriends {
-  Query$Users$users$mutualFriends copyWith(
+extension UtilityExtension$Query$FetchUsers$users$mutualFriends
+    on Query$FetchUsers$users$mutualFriends {
+  Query$FetchUsers$users$mutualFriends copyWith(
           {String? name, String? $__typename}) =>
-      Query$Users$users$mutualFriends(
+      Query$FetchUsers$users$mutualFriends(
+          name: name == null ? this.name : name,
+          $__typename: $__typename == null ? this.$__typename : $__typename);
+}
+
+@JsonSerializable(explicitToJson: true)
+class Variables$Mutation$AddFriend {
+  Variables$Mutation$AddFriend({required this.userId});
+
+  @override
+  factory Variables$Mutation$AddFriend.fromJson(Map<String, dynamic> json) =>
+      _$Variables$Mutation$AddFriendFromJson(json);
+
+  final String userId;
+
+  Map<String, dynamic> toJson() => _$Variables$Mutation$AddFriendToJson(this);
+  int get hashCode {
+    final l$userId = userId;
+    return Object.hashAll([l$userId]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (!(other is Variables$Mutation$AddFriend) ||
+        runtimeType != other.runtimeType) return false;
+    final l$userId = userId;
+    final lOther$userId = other.userId;
+    if (l$userId != lOther$userId) return false;
+    return true;
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class Mutation$AddFriend {
+  Mutation$AddFriend({this.addFriend, required this.$__typename});
+
+  @override
+  factory Mutation$AddFriend.fromJson(Map<String, dynamic> json) =>
+      _$Mutation$AddFriendFromJson(json);
+
+  final Mutation$AddFriend$addFriend? addFriend;
+
+  @JsonKey(name: '__typename')
+  final String $__typename;
+
+  Map<String, dynamic> toJson() => _$Mutation$AddFriendToJson(this);
+  int get hashCode {
+    final l$addFriend = addFriend;
+    final l$$__typename = $__typename;
+    return Object.hashAll([l$addFriend, l$$__typename]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (!(other is Mutation$AddFriend) || runtimeType != other.runtimeType)
+      return false;
+    final l$addFriend = addFriend;
+    final lOther$addFriend = other.addFriend;
+    if (l$addFriend != lOther$addFriend) return false;
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) return false;
+    return true;
+  }
+}
+
+extension UtilityExtension$Mutation$AddFriend on Mutation$AddFriend {
+  Mutation$AddFriend copyWith(
+          {Mutation$AddFriend$addFriend? Function()? addFriend,
+          String? $__typename}) =>
+      Mutation$AddFriend(
+          addFriend: addFriend == null ? this.addFriend : addFriend(),
+          $__typename: $__typename == null ? this.$__typename : $__typename);
+}
+
+const queryDocumentAddFriend = DocumentNode(definitions: [
+  OperationDefinitionNode(
+      type: OperationType.mutation,
+      name: NameNode(value: 'AddFriend'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'userId')),
+            type: NamedTypeNode(name: NameNode(value: 'ID'), isNonNull: true),
+            defaultValue: DefaultValueNode(value: null),
+            directives: [])
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+            name: NameNode(value: 'addFriend'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                  name: NameNode(value: 'userId'),
+                  value: VariableNode(name: NameNode(value: 'userId')))
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                  name: NameNode(value: 'user'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: SelectionSetNode(selections: [
+                    FieldNode(
+                        name: NameNode(value: 'name'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: '__typename'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null)
+                  ])),
+              FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null)
+            ])),
+        FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null)
+      ])),
+]);
+
+@JsonSerializable(explicitToJson: true)
+class Mutation$AddFriend$addFriend {
+  Mutation$AddFriend$addFriend({this.user, required this.$__typename});
+
+  @override
+  factory Mutation$AddFriend$addFriend.fromJson(Map<String, dynamic> json) =>
+      _$Mutation$AddFriend$addFriendFromJson(json);
+
+  final Mutation$AddFriend$addFriend$user? user;
+
+  @JsonKey(name: '__typename')
+  final String $__typename;
+
+  Map<String, dynamic> toJson() => _$Mutation$AddFriend$addFriendToJson(this);
+  int get hashCode {
+    final l$user = user;
+    final l$$__typename = $__typename;
+    return Object.hashAll([l$user, l$$__typename]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (!(other is Mutation$AddFriend$addFriend) ||
+        runtimeType != other.runtimeType) return false;
+    final l$user = user;
+    final lOther$user = other.user;
+    if (l$user != lOther$user) return false;
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) return false;
+    return true;
+  }
+}
+
+extension UtilityExtension$Mutation$AddFriend$addFriend
+    on Mutation$AddFriend$addFriend {
+  Mutation$AddFriend$addFriend copyWith(
+          {Mutation$AddFriend$addFriend$user? Function()? user,
+          String? $__typename}) =>
+      Mutation$AddFriend$addFriend(
+          user: user == null ? this.user : user(),
+          $__typename: $__typename == null ? this.$__typename : $__typename);
+}
+
+@JsonSerializable(explicitToJson: true)
+class Mutation$AddFriend$addFriend$user {
+  Mutation$AddFriend$addFriend$user(
+      {required this.name, required this.$__typename});
+
+  @override
+  factory Mutation$AddFriend$addFriend$user.fromJson(
+          Map<String, dynamic> json) =>
+      _$Mutation$AddFriend$addFriend$userFromJson(json);
+
+  final String name;
+
+  @JsonKey(name: '__typename')
+  final String $__typename;
+
+  Map<String, dynamic> toJson() =>
+      _$Mutation$AddFriend$addFriend$userToJson(this);
+  int get hashCode {
+    final l$name = name;
+    final l$$__typename = $__typename;
+    return Object.hashAll([l$name, l$$__typename]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (!(other is Mutation$AddFriend$addFriend$user) ||
+        runtimeType != other.runtimeType) return false;
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) return false;
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) return false;
+    return true;
+  }
+}
+
+extension UtilityExtension$Mutation$AddFriend$addFriend$user
+    on Mutation$AddFriend$addFriend$user {
+  Mutation$AddFriend$addFriend$user copyWith(
+          {String? name, String? $__typename}) =>
+      Mutation$AddFriend$addFriend$user(
           name: name == null ? this.name : name,
           $__typename: $__typename == null ? this.$__typename : $__typename);
 }

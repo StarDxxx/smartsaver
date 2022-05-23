@@ -13,9 +13,9 @@ class UserType(DjangoObjectType):
 
     def resolve_mutual_friends(self, info):
         user = info.context.user
+
         if user.is_anonymous:
             return None
-
         return self.friends.all() & user.friends.all()
 
 
@@ -82,7 +82,6 @@ class AddFriend(graphene.Mutation):
     @login_required
     def mutate(cls, root, info, user_id):
         user = info.context.user
-        print(user)
 
         friend = get_user_model().objects.filter(pk=user_id).get()
 

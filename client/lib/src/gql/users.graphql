@@ -1,9 +1,17 @@
-query Users($name: String, $email: String) {
+query FetchUsers($name: String, $email: String) {
 	users(name: $name, email: $email) {
 		id
 		name
 		email
 		mutualFriends {
+			name
+		}
+	}
+}
+
+mutation AddFriend($userId: ID!) {
+	addFriend(userId: $userId) {
+		user {
 			name
 		}
 	}
