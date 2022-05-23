@@ -1,8 +1,10 @@
 from django.contrib.auth import get_user_model
+from django.db.models import Q
 from django.db.models.functions import Lower
 import graphene
 from graphene_django import DjangoObjectType
 from graphql_jwt.decorators import login_required
+
 
 
 class UserType(DjangoObjectType):
@@ -45,12 +47,13 @@ class Query(graphene.ObjectType):
             return user
 
         return None
-
+    @login_required
     def resolve_users(root, info, name=None, email=None, **kwargs):
         """
         Get all the users or filter by name or email
         """
-        users = get_user_model().objects.all()
+        me = info.context.user
+        users = get_user_model().objects.filter(~Q(id=me.id))
 
         # Apply search filters if any
         if name:

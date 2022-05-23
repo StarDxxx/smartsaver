@@ -38,7 +38,7 @@ class Variables$Query$FetchUsers {
 
 @JsonSerializable(explicitToJson: true)
 class Query$FetchUsers {
-  Query$FetchUsers({this.users, required this.$__typename});
+  Query$FetchUsers({this.users, this.me, required this.$__typename});
 
   @override
   factory Query$FetchUsers.fromJson(Map<String, dynamic> json) =>
@@ -46,15 +46,19 @@ class Query$FetchUsers {
 
   final List<Query$FetchUsers$users?>? users;
 
+  final Query$FetchUsers$me? me;
+
   @JsonKey(name: '__typename')
   final String $__typename;
 
   Map<String, dynamic> toJson() => _$Query$FetchUsersToJson(this);
   int get hashCode {
     final l$users = users;
+    final l$me = me;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$users == null ? null : Object.hashAll(l$users.map((v) => v)),
+      l$me,
       l$$__typename
     ]);
   }
@@ -77,6 +81,9 @@ class Query$FetchUsers {
       return false;
     }
 
+    final l$me = me;
+    final lOther$me = other.me;
+    if (l$me != lOther$me) return false;
     final l$$__typename = $__typename;
     final lOther$$__typename = other.$__typename;
     if (l$$__typename != lOther$$__typename) return false;
@@ -87,9 +94,11 @@ class Query$FetchUsers {
 extension UtilityExtension$Query$FetchUsers on Query$FetchUsers {
   Query$FetchUsers copyWith(
           {List<Query$FetchUsers$users?>? Function()? users,
+          Query$FetchUsers$me? Function()? me,
           String? $__typename}) =>
       Query$FetchUsers(
           users: users == null ? this.users : users(),
+          me: me == null ? this.me : me(),
           $__typename: $__typename == null ? this.$__typename : $__typename);
 }
 
@@ -150,6 +159,56 @@ const queryDocumentFetchUsers = DocumentNode(definitions: [
                   arguments: [],
                   directives: [],
                   selectionSet: SelectionSetNode(selections: [
+                    FieldNode(
+                        name: NameNode(value: 'name'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: '__typename'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null)
+                  ])),
+              FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null)
+            ])),
+        FieldNode(
+            name: NameNode(value: 'me'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                  name: NameNode(value: 'id'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
+              FieldNode(
+                  name: NameNode(value: 'name'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
+              FieldNode(
+                  name: NameNode(value: 'friends'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: SelectionSetNode(selections: [
+                    FieldNode(
+                        name: NameNode(value: 'id'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
                     FieldNode(
                         name: NameNode(value: 'name'),
                         alias: null,
@@ -315,6 +374,129 @@ extension UtilityExtension$Query$FetchUsers$users$mutualFriends
   Query$FetchUsers$users$mutualFriends copyWith(
           {String? name, String? $__typename}) =>
       Query$FetchUsers$users$mutualFriends(
+          name: name == null ? this.name : name,
+          $__typename: $__typename == null ? this.$__typename : $__typename);
+}
+
+@JsonSerializable(explicitToJson: true)
+class Query$FetchUsers$me {
+  Query$FetchUsers$me(
+      {required this.id,
+      required this.name,
+      required this.friends,
+      required this.$__typename});
+
+  @override
+  factory Query$FetchUsers$me.fromJson(Map<String, dynamic> json) =>
+      _$Query$FetchUsers$meFromJson(json);
+
+  final String id;
+
+  final String name;
+
+  final List<Query$FetchUsers$me$friends> friends;
+
+  @JsonKey(name: '__typename')
+  final String $__typename;
+
+  Map<String, dynamic> toJson() => _$Query$FetchUsers$meToJson(this);
+  int get hashCode {
+    final l$id = id;
+    final l$name = name;
+    final l$friends = friends;
+    final l$$__typename = $__typename;
+    return Object.hashAll(
+        [l$id, l$name, Object.hashAll(l$friends.map((v) => v)), l$$__typename]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (!(other is Query$FetchUsers$me) || runtimeType != other.runtimeType)
+      return false;
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) return false;
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) return false;
+    final l$friends = friends;
+    final lOther$friends = other.friends;
+    if (l$friends.length != lOther$friends.length) return false;
+    for (int i = 0; i < l$friends.length; i++) {
+      final l$friends$entry = l$friends[i];
+      final lOther$friends$entry = lOther$friends[i];
+      if (l$friends$entry != lOther$friends$entry) return false;
+    }
+
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) return false;
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FetchUsers$me on Query$FetchUsers$me {
+  Query$FetchUsers$me copyWith(
+          {String? id,
+          String? name,
+          List<Query$FetchUsers$me$friends>? friends,
+          String? $__typename}) =>
+      Query$FetchUsers$me(
+          id: id == null ? this.id : id,
+          name: name == null ? this.name : name,
+          friends: friends == null ? this.friends : friends,
+          $__typename: $__typename == null ? this.$__typename : $__typename);
+}
+
+@JsonSerializable(explicitToJson: true)
+class Query$FetchUsers$me$friends {
+  Query$FetchUsers$me$friends(
+      {required this.id, required this.name, required this.$__typename});
+
+  @override
+  factory Query$FetchUsers$me$friends.fromJson(Map<String, dynamic> json) =>
+      _$Query$FetchUsers$me$friendsFromJson(json);
+
+  final String id;
+
+  final String name;
+
+  @JsonKey(name: '__typename')
+  final String $__typename;
+
+  Map<String, dynamic> toJson() => _$Query$FetchUsers$me$friendsToJson(this);
+  int get hashCode {
+    final l$id = id;
+    final l$name = name;
+    final l$$__typename = $__typename;
+    return Object.hashAll([l$id, l$name, l$$__typename]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (!(other is Query$FetchUsers$me$friends) ||
+        runtimeType != other.runtimeType) return false;
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) return false;
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) return false;
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) return false;
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$FetchUsers$me$friends
+    on Query$FetchUsers$me$friends {
+  Query$FetchUsers$me$friends copyWith(
+          {String? id, String? name, String? $__typename}) =>
+      Query$FetchUsers$me$friends(
+          id: id == null ? this.id : id,
           name: name == null ? this.name : name,
           $__typename: $__typename == null ? this.$__typename : $__typename);
 }

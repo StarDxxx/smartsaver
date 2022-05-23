@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:graphql/client.dart';
+import 'package:smartsaver/src/utils/messenger.dart';
 import 'package:smartsaver/src/views/dashboard.dart';
 
 import '../gql/auth.graphql.dart';
 import '../providers/auth.dart';
-import '../providers/client.dart';
 
 class Login extends ConsumerStatefulWidget {
   static const routeName = '/login';
@@ -30,19 +29,36 @@ class _LoginState extends ConsumerState<Login> {
     final maxWidth = MediaQuery.of(context).size.width;
     final maxHeight = MediaQuery.of(context).size.height;
     final isTab = maxWidth >= 769;
-    ref.listen<GraphQLClient>(gqlClientProvider, (value, other) {
-      if (value != null) {
+
+    void login(String email, String password) async {
+      try {
+        toggleLoading();
+        await ref.read(authStateProvider.notifier).login(
+              Variables$Mutation$Login(
+                email: email,
+                password: password,
+              ),
+            );
+
+        // ignore: use_build_context_synchronously
         Navigator.of(context)
             .pushNamedAndRemoveUntil(Dashboard.routeName, (route) => false);
+      } catch (e) {
+        toggleLoading();
+        showMessenger(
+          context,
+          message: "$e",
+          type: MessageType.error,
+        );
+        return null;
       }
-    }, onError: ((error, stackTrace) {}));
+    }
 
     return Scaffold(
       body: SingleChildScrollView(
         child: Center(
           child: Form(
             key: _formKey,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
             child: Container(
               width: isTab ? maxWidth * 0.6 : double.infinity,
               constraints: BoxConstraints(minHeight: maxHeight, maxWidth: 620),
@@ -85,7 +101,7 @@ class _LoginState extends ConsumerState<Login> {
                       enabled: !isLoading,
                       enableSuggestions: true,
                       decoration: const InputDecoration(
-                        labelText: 'Email',
+                        hintText: 'Email',
                         border: InputBorder.none,
                         suffixIcon: Icon(Icons.email),
                       ),
@@ -121,7 +137,7 @@ class _LoginState extends ConsumerState<Login> {
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: TextFormField(
                       decoration: const InputDecoration(
-                        labelText: 'Password',
+                        hintText: 'Password',
                         border: InputBorder.none,
                         suffixIcon: Icon(Icons.lock),
                       ),
@@ -152,16 +168,8 @@ class _LoginState extends ConsumerState<Login> {
                               // Basic validation
                               if (_formKey.currentState!.validate()) {
                                 _formKey.currentState!.save();
-                                ref.read(
-                                  authTokenProvider(
-                                    Variables$Mutation$Login(
-                                      email: email.trim().toLowerCase(),
-                                      password: password.trim(),
-                                    ),
-                                  ),
-                                );
+                                login(email.trim(), password.trim());
                               }
-                              toggleLoading();
                             },
                       child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 16.0),

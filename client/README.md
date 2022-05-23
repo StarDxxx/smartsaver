@@ -1,16 +1,12 @@
-# smartsaver
+# Smart Saver Hiring Task (Flutter Client)
 
-A new Flutter project.
+## Photo Credits:
 
-## Getting Started
+Images used as profile pictures in the client were sourced from the following photographers of [Unsplash](https://unsplash.com)
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. [Joseph Gonzalez](https://unsplash.com/@miracletwentyone?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+2. [Art Hauntington](https://unsplash.com/@art_hauntington?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+3. [Timothy Barlin](https://unsplash.com/es/@timbar?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+4. [Reza Biazar](https://unsplash.com/@biazar?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+5. [Matheus Ferrero](https://unsplash.com/@matheusferrero?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+6. [Prince Akachi](https://unsplash.com/@princearkman?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)

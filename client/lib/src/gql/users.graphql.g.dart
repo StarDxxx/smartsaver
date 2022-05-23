@@ -27,12 +27,16 @@ Query$FetchUsers _$Query$FetchUsersFromJson(Map<String, dynamic> json) =>
               ? null
               : Query$FetchUsers$users.fromJson(e as Map<String, dynamic>))
           .toList(),
+      me: json['me'] == null
+          ? null
+          : Query$FetchUsers$me.fromJson(json['me'] as Map<String, dynamic>),
       $__typename: json['__typename'] as String,
     );
 
 Map<String, dynamic> _$Query$FetchUsersToJson(Query$FetchUsers instance) =>
     <String, dynamic>{
       'users': instance.users?.map((e) => e?.toJson()).toList(),
+      'me': instance.me?.toJson(),
       '__typename': instance.$__typename,
     };
 
@@ -71,6 +75,42 @@ Query$FetchUsers$users$mutualFriends
 Map<String, dynamic> _$Query$FetchUsers$users$mutualFriendsToJson(
         Query$FetchUsers$users$mutualFriends instance) =>
     <String, dynamic>{
+      'name': instance.name,
+      '__typename': instance.$__typename,
+    };
+
+Query$FetchUsers$me _$Query$FetchUsers$meFromJson(Map<String, dynamic> json) =>
+    Query$FetchUsers$me(
+      id: json['id'] as String,
+      name: json['name'] as String,
+      friends: (json['friends'] as List<dynamic>)
+          .map((e) =>
+              Query$FetchUsers$me$friends.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      $__typename: json['__typename'] as String,
+    );
+
+Map<String, dynamic> _$Query$FetchUsers$meToJson(
+        Query$FetchUsers$me instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'friends': instance.friends.map((e) => e.toJson()).toList(),
+      '__typename': instance.$__typename,
+    };
+
+Query$FetchUsers$me$friends _$Query$FetchUsers$me$friendsFromJson(
+        Map<String, dynamic> json) =>
+    Query$FetchUsers$me$friends(
+      id: json['id'] as String,
+      name: json['name'] as String,
+      $__typename: json['__typename'] as String,
+    );
+
+Map<String, dynamic> _$Query$FetchUsers$me$friendsToJson(
+        Query$FetchUsers$me$friends instance) =>
+    <String, dynamic>{
+      'id': instance.id,
       'name': instance.name,
       '__typename': instance.$__typename,
     };

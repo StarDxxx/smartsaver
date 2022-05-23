@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:smartsaver/src/providers/auth.dart';
 
 import 'dashboard.dart';
 import 'login.dart';
@@ -10,46 +11,12 @@ class Home extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Smart Saver'),
-        centerTitle: true,
-      ),
-      body: SizedBox(
-        width: double.infinity,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed(Login.routeName);
-              },
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 12.0,
-                  horizontal: 16.0,
-                ),
-                child: Text(
-                  'Login'.toUpperCase(),
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed(Dashboard.routeName);
-              },
-              child: const Padding(
-                padding: EdgeInsets.all(16.0),
-                child: Text('Dashboard'),
-              ),
-            )
-          ],
-        ),
-      ),
-    );
+    final authState = ref.watch(authStateProvider);
+    switch (authState) {
+      case AuthState.authenticated:
+        return const Dashboard();
+      default:
+        return const Login();
+    }
   }
 }

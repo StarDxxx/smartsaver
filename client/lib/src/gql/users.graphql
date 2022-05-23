@@ -7,6 +7,15 @@ query FetchUsers($name: String, $email: String) {
 			name
 		}
 	}
+
+	me {
+		id
+		name
+		friends {
+			id
+			name
+		}
+	}
 }
 
 mutation AddFriend($userId: ID!) {
