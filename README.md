@@ -1,4 +1,4 @@
-# Smart Saver Hiring Task
+# Hiring Task
 
 Create a full-stack application with Python (Django) and Dart (Flutter)
 
